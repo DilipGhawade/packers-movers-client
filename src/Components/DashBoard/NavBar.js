@@ -6,6 +6,8 @@ const NavBar = () => {
   const handleLogout = () => {
     authApi.logout();
   };
+  const role = authApi.getRole();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
       <img
@@ -34,19 +36,37 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/dashboard/contact" className="nav-link">
-              Contact
-            </NavLink>
+            {role === "admin" ? (
+              <NavLink to="/dashboard/admincontacts" className="nav-link">
+                Contact
+              </NavLink>
+            ) : (
+              <NavLink to="/dashboard/contact" className="nav-link">
+                Contact
+              </NavLink>
+            )}
           </li>
           <li className="nav-item">
-            <NavLink to="/dashboard/service" className="nav-link">
-              Service
-            </NavLink>
+            {role === "admin" ? (
+              <NavLink to="/dashboard/servicemanagement" className="nav-link">
+                Service
+              </NavLink>
+            ) : (
+              <NavLink to="/dashboard/service" className="nav-link">
+                Service
+              </NavLink>
+            )}
           </li>
           <li>
-            <NavLink to="/dashboard/quote" className="nav-link">
-              Quote
-            </NavLink>
+            {role === "admin" ? (
+              <NavLink to="/dashboard/quotemanagement" className="nav-link">
+                Quote
+              </NavLink>
+            ) : (
+              <NavLink to="/dashboard/quote" className="nav-link">
+                Quote
+              </NavLink>
+            )}
           </li>
           <li className="nav-item">
             <NavLink to="/dashboard/price" className="nav-link">

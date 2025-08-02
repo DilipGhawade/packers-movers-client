@@ -65,6 +65,7 @@ export const authApi = {
 
         localStorage.setItem("isLogin", true);
         localStorage.setItem("email", resp.data.user.email);
+        localStorage.setItem("role", resp.data.user.role);
       }
       return resp;
     } catch (error) {
@@ -77,6 +78,7 @@ export const authApi = {
   logout: () => {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("email");
+    localStorage.removeItem("role");
     window.location.href = "/";
   },
   getAllServices: async (email) => {
@@ -94,6 +96,31 @@ export const authApi = {
       throw error;
     }
   },
+  getAllContact: async () => {
+    try {
+      const resp = await api.get("/users/getAllContact");
+      return resp;
+    } catch (error) {
+      console.error(
+        `Error occurred while fetching the contact. Error: ${error}`
+      );
+      throw error;
+    }
+    // axios.get("http://localhost:7000/api/users/getAllContact");
+  },
+
+  getAllPrice: async () => {
+    try {
+      const resp = await api.get("/getAllPrice");
+      return resp;
+    } catch (error) {
+      console.error(
+        `Error occurred while fetching the contact. Error: ${error}`
+      );
+      throw error;
+    }
+    // axios.get("http://localhost:7000/api/users/getAllContact");
+  },
 
   addQuote: async (quote) => {
     try {
@@ -104,6 +131,20 @@ export const authApi = {
 
       throw error;
     }
+  },
+
+  getAllQuote: async () => {
+    try {
+      const resp = await api.get("/getAllQuote");
+      return resp;
+    } catch (error) {
+      console.error(`Error while fetching quote Error : ${error.message}`);
+      throw error;
+    }
+  },
+
+  getRole: () => {
+    return localStorage.getItem("role") ? localStorage.getItem("role") : "";
   },
 
   isAuthenticte: () => {
